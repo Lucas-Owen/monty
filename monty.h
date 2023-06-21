@@ -23,15 +23,15 @@ typedef struct instruction_s
 
 /**
  * struct global_vars_s - Structure to hold global variables
- * @fp: File pointer to the file being read
+ * @fd: File pointer to the file being read
  * @operands: The main stack used to store variables
  *
- * Description: To keep track of fp and operands
+ * Description: To keep track of fd and operands
  * to be freed at exit
  */
 typedef struct global_vars_s
 {
-	FILE *fp;
+	int fd;
 	stack_t *operands;
 } global_vars_t;
 

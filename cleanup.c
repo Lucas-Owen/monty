@@ -6,8 +6,8 @@
  */
 void cleanup(void)
 {
-	if (globals.fp)
-		fclose(globals.fp);
+	if (globals.fd != -1)
+		close(globals.fd);
 	while (!s_isEmpty(globals.operands))
 		s_pop(&globals.operands);
 }

@@ -46,3 +46,39 @@ char *my_strdup(char *src)
 	strcpy(res, src);
 	return (res);
 }
+
+
+/**
+ * my_fgets - gets a line of input from the specified file descriptor
+ * @buf: Buffer to store input, ensure it has enough size to fit input
+ * @stream: File stream to read from
+ * @fd: File descriptor to read from
+ * Return: The number of bytes read, or -1 on error
+ */
+int my_fgets(char *buf, size_t size, int fd)
+{
+	static char buffer[BUFSIZ];
+	static int start, end;
+	int stop, res;
+
+	if (buf == NULL)
+		return (-1);
+
+	buf[0] = '\0';
+	if (start >= end)
+	{
+		buffer[0] = '\0';
+		res = read(fd, buffer, size);
+		if (res <= 0)
+			return (-1);
+		start = 0;
+		end = res;
+	}
+	for (stop = start; buffer[stop] && buffer[stop] != '\n'; ++stop)
+		;
+	res = stop - start;
+	strncat(buf, buffer + start, res);
+	start = stop + 1;
+	return (res);
+}
+
