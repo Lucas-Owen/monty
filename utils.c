@@ -42,6 +42,7 @@ bool string_is_int(char *str)
 char *my_strdup(char *src)
 {
 	char *res = my_malloc(strlen(src) + 1);
+
 	strcpy(res, src);
 	return (res);
 }
