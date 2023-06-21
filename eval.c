@@ -34,7 +34,7 @@ int validate_opcode(char *opcode, unsigned int line_number)
  * @buffer: Line of input
  * @line_number: Line number
  * @instruction: Pointer to store instruction
- * Return: void 
+ * Return: void
  */
 void eval_input(char *buffer, unsigned int line_number,
 	instruction_t *instruction)
@@ -43,16 +43,14 @@ void eval_input(char *buffer, unsigned int line_number,
 	char *token = strtok(buffer, " \n");
 
 	if (!token)
-	{
-		instruction->f = NULL;
 		return;
-	}
 	func = validate_opcode(token, line_number);
 	instruction->opcode = my_malloc(strlen(token) + 1);
 	strcpy(instruction->opcode, token);
 	switch (func)
 	{
-		case I_PUSH: token = strtok(NULL, " ");
+		case I_PUSH:
+				token = strtok(NULL, " ");
 				if (!token || !isdigit(token[0]))
 				{
 					free(instruction->opcode);
@@ -60,20 +58,25 @@ void eval_input(char *buffer, unsigned int line_number,
 					exit(EXIT_FAILURE);
 				}
 				s_push(&operands, atoi(token));
-				instruction->f = i_push;
+				instruction->f = NULL;
 				break;
-		case I_PALL: instruction->f = i_pall;
-					break;
-		case I_PINT: instruction->f = i_pint;
-					break;
-		case I_POP: instruction->f = i_pop;
-					break;
-		case I_SWAP: instruction->f = i_swap;
-					break;
-		case I_ADD: instruction->f = i_add;
-					break;
-		case I_NOP: instruction->f = NULL;
-					break;
-		
+		case I_PALL:
+				instruction->f = i_pall;
+				break;
+		case I_PINT:
+				instruction->f = i_pint;
+				break;
+		case I_POP:
+				instruction->f = i_pop;
+				break;
+		case I_SWAP:
+				instruction->f = i_swap;
+				break;
+		case I_ADD:
+				instruction->f = i_add;
+				break;
+		case I_NOP:
+				instruction->f = NULL;
+				break;
 	}
 }

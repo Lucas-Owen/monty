@@ -10,7 +10,7 @@ int main(int argc, char **argv)
 	extern stack_t *operands;
 	char buffer[BUFSIZ];
 	size_t line_number = 0;
-	instruction_t instruction;
+	instruction_t instruction = {NULL};
 
 	if (argc != 2)
 	{
@@ -28,11 +28,11 @@ int main(int argc, char **argv)
 		++line_number;
 		eval_input(buffer, line_number, &instruction);
 		if (instruction.f)
-			{
-				instruction.f(&operands, line_number);
-				free(instruction.opcode);
-				instruction.f = NULL;
-			}
+		{
+			instruction.f(&operands, line_number);
+			free(instruction.opcode);
+			instruction.f = NULL;
+		}
 	}
 	fclose(fp);
 	exit(EXIT_SUCCESS);

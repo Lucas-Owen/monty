@@ -29,17 +29,17 @@ void eval_input(char *buffer, unsigned int line_number, instruction_t *instructi
 #define I_POP 2
 #define I_PINT 3
 #define I_SWAP 4
-#define I_ADD 4
-#define I_NOP 5
+#define I_ADD 5
+#define I_NOP 6
 
-void i_push(stack_t **stack, unsigned int line_number);
+/* void i_push(stack_t **stack, unsigned int line_number); */
 void i_pall(stack_t **stack, unsigned int line_number);
 void i_pop(stack_t **stack, unsigned int line_number);
 void i_pint(stack_t **stack, unsigned int line_number);
 void i_swap(stack_t **stack, unsigned int line_number);
 void i_add(stack_t **stack, unsigned int line_number);
 
-__attribute__((destructor)) void cleanup();
+__attribute__((destructor)) void cleanup(void);
 
 
 #endif /* MONTY_H */
