@@ -51,6 +51,22 @@ int s_top(stack_t *stack)
 {
 	return (stack->n);
 }
+/*
+ * s_swap - swap the top two elements of the stack
+ * @stack: Pointer to the head of the stack
+ * Return: bool, true if swapped, false otherwise
+ */
+bool s_swap(stack_t *stack)
+{
+	int temp;
+
+	if (stack == NULL || stack->next == NULL || stack->next == NULL)
+		return (false);
+	temp = stack->n;
+	stack->n = stack->next->n;
+	stack->next->n = temp;
+	return (true);
+}
 
 /*
  * s_isEmpty - Checks if the stack is empty

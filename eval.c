@@ -1,23 +1,26 @@
 #include "monty.h"
 
-#define I_PUSH 0
-#define I_PALL 1
-
 stack_t *operands = NULL;
 
 /**
- * arg_count - Checks if an opcode is valid, returns the type of function
+ * validate_opcode - Checks if an opcode is valid, returns the type of function
  * as in macros I_PUSH, I_PALL etc
  * @opcode: The opcode
  * @line_number: Line number
  * Return: int
  */
-int arg_count(char *opcode, unsigned int line_number)
+int validate_opcode(char *opcode, unsigned int line_number)
 {
 	if (strcmp(opcode, "push") == 0)
 		return (I_PUSH);
 	if (strcmp(opcode, "pall") == 0)
 		return (I_PALL);
+	if (strcmp(opcode, "pint") == 0)
+		return (I_PINT);
+	if (strcmp(opcode, "pop") == 0)
+		return (I_POP);
+	if (strcmp(opcode, "swap") == 0)
+		return (I_SWAP);
 	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
 	exit(EXIT_FAILURE);
 }
@@ -40,7 +43,7 @@ void eval_input(char *buffer, unsigned int line_number,
 		instruction->f = NULL;
 		return;
 	}
-	func = arg_count(token, line_number);
+	func = validate_opcode(token, line_number);
 	instruction->opcode = my_malloc(strlen(token) + 1);
 	strcpy(instruction->opcode, token);
 	switch (func)
@@ -57,32 +60,10 @@ void eval_input(char *buffer, unsigned int line_number,
 				break;
 		case I_PALL: instruction->f = i_pall;
 					break;
+		case I_PINT: instruction->f = i_pint;
+					break;
+		case I_POP: instruction->f = i_pop;
+					break;
 		
-	}
-}
-/**
- * i_push - Pushes a value to the stack
- * @stack: The stack
- * @line_number: Line number of the function call
- */
-void i_push(stack_t **stack, unsigned int line_number)
-{
-	(void) stack;
-	(void) line_number;
-	return;
-}
-/**
- * i_pall - Prints all the values on the stack, starting from the top
- * @stack: The stack
- */
-void i_pall(stack_t **stack, unsigned int line_number)
-{
-	stack_t *temp = *stack;
-	(void) line_number;
-
-	while (temp)
-	{
-		printf("%d\n", temp->n);
-		temp = temp->next;
 	}
 }
