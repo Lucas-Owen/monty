@@ -1,18 +1,5 @@
 #include "monty.h"
 
-/*
- * i_push - Pushes a value to the stack
- * @stack: The stack
- * @line_number: Line number of the function call
- */
-/*
- *void i_push(stack_t **stack, unsigned int line_number)
- *{
- *	(void) stack;
- *	(void) line_number;
- *	return;
- *}
- */
 
 /**
  * i_pall - Prints all the values on the stack, starting from the top

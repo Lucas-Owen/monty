@@ -21,7 +21,7 @@ typedef struct instruction_s
 		void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void eval_input(char *buffer, unsigned int line_number, instruction_t *instruction);
+void eval_input(char *buffer, unsigned int, instruction_t *);
 
 
 #define I_PUSH 0
@@ -32,7 +32,8 @@ void eval_input(char *buffer, unsigned int line_number, instruction_t *instructi
 #define I_ADD 5
 #define I_NOP 6
 
-/* void i_push(stack_t **stack, unsigned int line_number); */
+void i_push(stack_t **stack, unsigned int line_number);
+void i_nop(stack_t **stack, unsigned int line_number);
 void i_pall(stack_t **stack, unsigned int line_number);
 void i_pop(stack_t **stack, unsigned int line_number);
 void i_pint(stack_t **stack, unsigned int line_number);

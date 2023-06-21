@@ -3,7 +3,7 @@
 /**
  * my_malloc - Wrapper around malloc to print to stderr if it fails
  * @size: Allocation size
- * Rreturn: void*
+ * Return: void*
  */
 void *my_malloc(size_t size)
 {

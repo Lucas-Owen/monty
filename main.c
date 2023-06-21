@@ -3,11 +3,17 @@
 #include <unistd.h>
 
 #include "monty.h"
+#include "externs.h"
 
+/**
+ * main - An interpreter for the monty bytecode
+ * @argc: Argcount
+ * @argv: Args
+ * Return: (0) Success, (1) Failure
+ */
 int main(int argc, char **argv)
 {
 	FILE *fp;
-	extern stack_t *operands;
 	char buffer[BUFSIZ];
 	size_t line_number = 0;
 	instruction_t instruction = {NULL};

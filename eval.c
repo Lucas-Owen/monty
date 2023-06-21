@@ -58,7 +58,7 @@ void eval_input(char *buffer, unsigned int line_number,
 					exit(EXIT_FAILURE);
 				}
 				s_push(&operands, atoi(token));
-				instruction->f = NULL;
+				instruction->f = i_push;
 				break;
 		case I_PALL:
 				instruction->f = i_pall;
@@ -76,7 +76,7 @@ void eval_input(char *buffer, unsigned int line_number,
 				instruction->f = i_add;
 				break;
 		case I_NOP:
-				instruction->f = NULL;
+				instruction->f = i_nop;
 				break;
 	}
 }
