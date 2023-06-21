@@ -21,6 +21,10 @@ int validate_opcode(char *opcode, unsigned int line_number)
 		return (I_POP);
 	if (strcmp(opcode, "swap") == 0)
 		return (I_SWAP);
+	if (strcmp(opcode, "add") == 0)
+		return (I_ADD);
+	if (strcmp(opcode, "nop") == 0)
+		return (I_NOP);
 	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
 	exit(EXIT_FAILURE);
 }
@@ -63,6 +67,12 @@ void eval_input(char *buffer, unsigned int line_number,
 		case I_PINT: instruction->f = i_pint;
 					break;
 		case I_POP: instruction->f = i_pop;
+					break;
+		case I_SWAP: instruction->f = i_swap;
+					break;
+		case I_ADD: instruction->f = i_add;
+					break;
+		case I_NOP: instruction->f = NULL;
 					break;
 		
 	}
