@@ -45,13 +45,12 @@ void eval_input(char *buffer, unsigned int line_number,
 	if (!token)
 		return;
 	func = validate_opcode(token, line_number);
-	instruction->opcode = my_malloc(strlen(token) + 1);
-	strcpy(instruction->opcode, token);
+	instruction->opcode = my_strdup(token);
 	switch (func)
 	{
 		case I_PUSH:
-				token = strtok(NULL, " ");
-				if (!token || !isdigit(token[0]))
+				token = strtok(NULL, " \n");
+				if (!token || !string_is_int(token))
 				{
 					free(instruction->opcode);
 					fprintf(stderr, "L%d: usage: push integer\n", line_number);
