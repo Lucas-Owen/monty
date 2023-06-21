@@ -1,6 +1,6 @@
 #include "monty.h"
 
-stack_t *operands = NULL;
+global_vars_t globals = {NULL};
 
 /**
  * validate_opcode - Checks if an opcode is valid, returns the type of function
@@ -56,7 +56,7 @@ void eval_input(char *buffer, unsigned int line_number,
 					fprintf(stderr, "L%d: usage: push integer\n", line_number);
 					exit(EXIT_FAILURE);
 				}
-				s_push(&operands, atoi(token));
+				s_push(&globals.operands, atoi(token));
 				instruction->f = i_push;
 				break;
 		case I_PALL:

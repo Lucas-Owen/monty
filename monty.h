@@ -21,6 +21,20 @@ typedef struct instruction_s
 		void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+/**
+ * struct global_vars_s - Structure to hold global variables
+ * @fp: File pointer to the file being read
+ * @operands: The main stack used to store variables
+ *
+ * Description: To keep track of fp and operands
+ * to be freed at exit
+ */
+typedef struct global_vars_s
+{
+	FILE *fp;
+	stack_t *operands;
+} global_vars_t;
+
 void eval_input(char *buffer, unsigned int, instruction_t *);
 
 

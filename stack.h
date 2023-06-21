@@ -24,6 +24,7 @@ typedef struct stack_s
 		struct stack_s *next;
 } stack_t;
 
+
 void s_push(stack_t **, int);
 void s_pop(stack_t **);
 int s_top(stack_t *);
