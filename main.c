@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	while (my_fgets(buffer, BUFSIZ - 1, globals.fd) > 0)
+	while (my_fgets(buffer, BUFSIZ - 1, globals.fd) >= 0)
 	{
 		++line_number;
 		eval_input(buffer, line_number);
