@@ -1,6 +1,6 @@
 #include "monty.h"
 
-global_vars_t globals = {-1, NULL, MODE_STACK, {NULL, NULL}};
+global_vars_t globals = {NULL, NULL, MODE_STACK, {NULL, NULL}};
 
 /**
  * validate_opcode - Checks if an opcode is valid, returns the type of function

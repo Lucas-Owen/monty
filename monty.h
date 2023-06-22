@@ -33,7 +33,7 @@ typedef struct instruction_s
  */
 typedef struct global_vars_s
 {
-	int fd;
+	FILE *fd;
 	stack_t *operands;
 	char opmode;
 	instruction_t current_instruction;

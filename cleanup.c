@@ -6,8 +6,8 @@
  */
 void cleanup(void)
 {
-	if (globals.fd != -1)
-		close(globals.fd);
+	if (globals.fd)
+		fclose(globals.fd);
 	free(globals.current_instruction.opcode);
 	s_clear(&globals.operands);
 }

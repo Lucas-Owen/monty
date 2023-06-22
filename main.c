@@ -24,13 +24,13 @@ int main(int argc, char **argv)
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
-	globals.fd = open(argv[1], O_RDONLY);
-	if (globals.fd < 0)
+	globals.fd = fopen(argv[1], "r");
+	if (!globals.fd)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	while (my_fgets(buffer, BUFSIZ - 1, globals.fd) >= 0)
+	while (fgets(buffer, BUFSIZ - 1, globals.fd))
 	{
 		++line_number;
 		eval_input(buffer, line_number);
