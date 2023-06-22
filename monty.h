@@ -51,13 +51,18 @@ void eval_input(char *buffer, unsigned int, instruction_t *);
 #define I_MOD 	10
 #define I_PCHAR 11
 #define I_PSTR 	12
+#define I_ROTL 	13
+#define I_ROTR 	14
 
 void i_push(stack_t **stack, unsigned int line_number);
 void i_nop(stack_t **stack, unsigned int line_number);
 void i_pall(stack_t **stack, unsigned int line_number);
 void i_pop(stack_t **stack, unsigned int line_number);
 void i_pint(stack_t **stack, unsigned int line_number);
+
 void i_swap(stack_t **stack, unsigned int line_number);
+void i_rotl(stack_t **stack, unsigned int line_number);
+void i_rotr(stack_t **stack, unsigned int line_number);
 
 void i_add(stack_t **stack, unsigned int line_number);
 void i_sub(stack_t **stack, unsigned int line_number);

@@ -37,6 +37,10 @@ int validate_opcode(char *opcode, unsigned int line_number)
 		return (I_PCHAR);
 	if (strcmp(opcode, "pstr") == 0)
 		return (I_PSTR);
+	if (strcmp(opcode, "rotl") == 0)
+		return (I_ROTL);
+	if (strcmp(opcode, "rotr") == 0)
+		return (I_ROTR);
 	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
 	exit(EXIT_FAILURE);
 }
@@ -52,7 +56,10 @@ void eval_input(char *buffer, unsigned int line_number,
 	instruction_t *instruction)
 {
 	const void (*funcs[])(stack_t **, unsigned int) = {i_push, i_pall, i_pop,
-	i_pint, i_swap, i_nop, i_add, i_sub, i_mul, i_div, i_mod, i_pchar, i_pstr};
+				i_pint, i_swap, i_nop,
+				i_add, i_sub, i_mul, i_div, i_mod,
+				i_pchar, i_pstr,
+				i_rotl, i_rotr};
 	int func;
 	char *token = strtok(buffer, " \n");
 

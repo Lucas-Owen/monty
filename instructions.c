@@ -30,4 +30,24 @@ void i_swap(stack_t **stack, unsigned int line_number)
 	}
 }
 
+/**
+ * i_rotl - Rotate stack to the top
+ * Top element becomes bottom
+ * @stack: The stack
+ * @line_number: Line number of the function call
+ */
+void i_rotl(stack_t **stack, unsigned int line_number)
+{
+	s_rotl(stack);
+}
 
+/**
+ * i_rotr - Rotate stack to the bottom
+ * Bottom element becomes top
+ * @stack: The stack
+ * @line_number: Line number of the function call
+ */
+void i_rotr(stack_t **stack, unsigned int line_number)
+{
+	s_rotr(stack);
+}
