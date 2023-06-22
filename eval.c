@@ -44,7 +44,7 @@ void eval_input(char *buffer, unsigned int line_number,
 	int func;
 	char *token = strtok(buffer, " \n");
 
-	if (!token)
+	if (!token || strcmp(token, "#") == 0)
 		return;
 	func = validate_opcode(token, line_number);
 	instruction->opcode = my_strdup(token);

@@ -61,7 +61,7 @@ void i_mul(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * i_div - Subtract the top from the second element of the stack,
+ * i_div - Divide the top from the second element of the stack,
  pop the first element, and store the result in the top element
  * @stack: The stack
  * @line_number: Line number of the function call
@@ -81,7 +81,7 @@ void i_div(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * i_mod - Subtract the top from the second element of the stack,
+ * i_mod - Mod the top from the second element of the stack,
  pop the first element, and store the result in the top element
  * @stack: The stack
  * @line_number: Line number of the function call
