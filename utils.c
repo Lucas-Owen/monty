@@ -51,7 +51,7 @@ char *my_strdup(char *src)
 /**
  * my_fgets - gets a line of input from the specified file descriptor
  * @buf: Buffer to store input, ensure it has enough size to fit input
- * @stream: File stream to read from
+ * @size: Size to read
  * @fd: File descriptor to read from
  * Return: The number of bytes read, or -1 on error
  */

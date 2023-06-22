@@ -43,6 +43,23 @@ void s_pop(stack_t **stack)
 }
 
 /**
+ * s_clear - Frees the stack
+ * @stack: Pointer to the head of the stack
+ * Return: void
+ */
+void s_clear(stack_t **stack)
+{
+	stack_t *temp = *stack;
+
+	while (temp)
+	{
+		(*stack) = (*stack)->next;
+		free(temp);
+		temp = (*stack);
+	}
+}
+
+/**
  * s_top - performs a s_top operation on the stack
  * @stack: Pointer to the head of the stack
  * Return: int

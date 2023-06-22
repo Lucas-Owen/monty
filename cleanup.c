@@ -8,6 +8,6 @@ void cleanup(void)
 {
 	if (globals.fd != -1)
 		close(globals.fd);
-	while (!s_isEmpty(globals.operands))
-		s_pop(&globals.operands);
+	free(globals.current_instruction.opcode);
+	s_clear(&globals.operands);
 }

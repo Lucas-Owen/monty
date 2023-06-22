@@ -24,17 +24,17 @@ bool s_swap(stack_t **stack)
  */
 void s_rotl(stack_t **stack)
 {
-    stack_t *temp = *stack, *first = *stack;
+	stack_t *temp = *stack, *first = *stack;
 
-    if (temp == NULL || temp->next == NULL)
-        return;
-    while (temp->next)
-        temp = temp->next;
-    *stack = first->next;
-    (*stack)->prev = NULL;
-    first->next = NULL;
-    first->prev = temp;
-    temp->next = first;
+	if (temp == NULL || temp->next == NULL)
+		return;
+	while (temp->next)
+		temp = temp->next;
+	*stack = first->next;
+	(*stack)->prev = NULL;
+	first->next = NULL;
+	first->prev = temp;
+	temp->next = first;
 }
 
 /**
@@ -44,17 +44,17 @@ void s_rotl(stack_t **stack)
  */
 void s_rotr(stack_t **stack)
 {
-    stack_t *second_last = *stack, *first = *stack;
+	stack_t *second_last = *stack, *first = *stack;
 
-    if (first == NULL || first->next == NULL)
-        return;
-    while (second_last->next->next)
-        second_last = second_last->next;
-    second_last->next->prev = NULL
-    second_last->next->next = (*stack);
-    (*stack)->prev = second_last->next;
-    (*stack) = second_last->next;
-    second_last->next = NULL;
+	if (first == NULL || first->next == NULL)
+		return;
+	while (second_last->next->next)
+		second_last = second_last->next;
+	second_last->next->prev = NULL;
+	second_last->next->next = (*stack);
+	(*stack)->prev = second_last->next;
+	(*stack) = second_last->next;
+	second_last->next = NULL;
 }
 
 /**
@@ -64,15 +64,17 @@ void s_rotr(stack_t **stack)
  */
 void s_reverse(stack_t **stack)
 {
-    if (*stack == NULL)
-        return;
-    temp = *stack;
-    while (temp)
-    {
-        *stack = temp;
-        next = temp->next;
-        temp->next = temp->prev;
-        temp->prev = next;
-        temp = next;
-    }
+	stack_t *temp, *next;
+
+	if (*stack == NULL)
+		return;
+	temp = *stack;
+	while (temp)
+	{
+		*stack = temp;
+		next = temp->next;
+		temp->next = temp->prev;
+		temp->prev = next;
+		temp = next;
+	}
 }

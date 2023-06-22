@@ -18,7 +18,6 @@ int main(int argc, char **argv)
 {
 	char buffer[BUFSIZ];
 	size_t line_number = 0;
-	instruction_t instruction = {NULL};
 
 	if (argc != 2)
 	{
@@ -34,12 +33,13 @@ int main(int argc, char **argv)
 	while (my_fgets(buffer, BUFSIZ - 1, globals.fd) > 0)
 	{
 		++line_number;
-		eval_input(buffer, line_number, &instruction);
-		if (instruction.f)
+		eval_input(buffer, line_number);
+		if (globals.current_instruction.f)
 		{
-			instruction.f(&globals.operands, line_number);
-			free(instruction.opcode);
-			instruction.f = NULL;
+			globals.current_instruction.f(&globals.operands, line_number);
+			free(globals.current_instruction.opcode);
+			globals.current_instruction.f = NULL;
+			globals.current_instruction.opcode = NULL;
 		}
 	}
 	exit(EXIT_SUCCESS);

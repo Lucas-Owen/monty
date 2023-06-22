@@ -22,7 +22,7 @@ void i_add(stack_t **stack, unsigned int line_number)
 
 /**
  * i_sub - Subtract the top from the second element of the stack,
- pop the first element, and store the result in the top element
+ * pop the first element, and store the result in the top element
  * @stack: The stack
  * @line_number: Line number of the function call
  */
@@ -42,7 +42,7 @@ void i_sub(stack_t **stack, unsigned int line_number)
 
 /**
  * i_mul - Multiply the top two elements of the stack,
- pop the first element, and store the result in the top element
+ * pop the first element, and store the result in the top element
  * @stack: The stack
  * @line_number: Line number of the function call
  */
@@ -62,7 +62,7 @@ void i_mul(stack_t **stack, unsigned int line_number)
 
 /**
  * i_div - Divide the second by the top element of the stack,
- pop the first element, and store the result in the top element
+ * pop the first element, and store the result in the top element
  * @stack: The stack
  * @line_number: Line number of the function call
  */
@@ -77,12 +77,17 @@ void i_div(stack_t **stack, unsigned int line_number)
 	}
 	result = s_top(*stack);
 	s_pop(stack);
+	if (result == 0)
+	{
+		fprintf(stderr, "L%d: division by zero\n", line_number);
+		exit(EXIT_FAILURE);
+	}
 	(*stack)->n /= result;
 }
 
 /**
  * i_mod - Mod the second by the top element of the stack,
- pop the first element, and store the result in the top element
+ * pop the first element, and store the result in the top element
  * @stack: The stack
  * @line_number: Line number of the function call
  */
@@ -96,6 +101,11 @@ void i_mod(stack_t **stack, unsigned int line_number)
 		exit(EXIT_FAILURE);
 	}
 	result = s_top(*stack);
+	if (result == 0)
+	{
+		fprintf(stderr, "L%d: division by zero\n", line_number);
+		exit(EXIT_FAILURE);
+	}
 	s_pop(stack);
 	(*stack)->n %= result;
 }

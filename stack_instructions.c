@@ -36,7 +36,7 @@ void i_swap(stack_t **stack, unsigned int line_number)
  * @stack: The stack
  * @line_number: Line number of the function call
  */
-void i_rotl(stack_t **stack, unsigned int line_number)
+void i_rotl(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 {
 	s_rotl(stack);
 }
@@ -47,7 +47,7 @@ void i_rotl(stack_t **stack, unsigned int line_number)
  * @stack: The stack
  * @line_number: Line number of the function call
  */
-void i_rotr(stack_t **stack, unsigned int line_number)
+void i_rotr(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 {
 	s_rotr(stack);
 }

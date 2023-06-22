@@ -28,6 +28,7 @@ typedef struct stack_s
 void s_push(stack_t **, int);
 void s_pop(stack_t **);
 int s_top(stack_t *);
+void s_clear(stack_t **);
 bool s_isEmpty(stack_t *);
 
 /* Advanced stack methods */

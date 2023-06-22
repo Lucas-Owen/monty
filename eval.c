@@ -1,6 +1,6 @@
 #include "monty.h"
 
-global_vars_t globals = {-1, NULL, MODE_STACK};
+global_vars_t globals = {-1, NULL, MODE_STACK, {NULL, NULL}};
 
 /**
  * validate_opcode - Checks if an opcode is valid, returns the type of function
@@ -53,37 +53,35 @@ int validate_opcode(char *opcode, unsigned int line_number)
  * eval_input - parses a line of input and evaluates the instruction obtained
  * @buffer: Line of input
  * @line_number: Line number
- * @instruction: Pointer to store instruction
  * Return: void
  */
-void eval_input(char *buffer, unsigned int line_number,
-	instruction_t *instruction)
+void eval_input(char *buffer, unsigned int line_number)
 {
-	const void (*funcs[])(stack_t **, unsigned int) = {i_push, i_pall, i_pop,
+	static void (*funcs[])(stack_t **, unsigned int) = {i_push, i_pall, i_pop,
 				i_pint, i_swap, i_nop,
 				i_add, i_sub, i_mul, i_div, i_mod,
 				i_pchar, i_pstr,
-				i_rotl, i_rotr};
+				i_rotl, i_rotr,
+				i_nop, i_nop};
 	int func;
 	char *token = strtok(buffer, " \n");
 
 	if (!token || token[0] == '#')
 		return;
 	func = validate_opcode(token, line_number);
-	instruction->opcode = my_strdup(token);
+	globals.current_instruction.opcode = my_strdup(token);
 	switch (func)
 	{
 		case I_PUSH:
 			token = strtok(NULL, " \n");
 			if (!token || !string_is_int(token))
 			{
-				free(instruction->opcode);
 				fprintf(stderr, "L%d: usage: push integer\n", line_number);
 				exit(EXIT_FAILURE);
 			}
 			s_push(&globals.operands, atoi(token));
-			if (globas.opmode == MODE_QUEUE)
-				i_rotl(&globals.operands);
+			if (globals.opmode == MODE_QUEUE)
+				s_rotl(&globals.operands);
 			break;
 		case I_STACK:
 			globals.opmode = MODE_STACK;
@@ -92,5 +90,5 @@ void eval_input(char *buffer, unsigned int line_number,
 			globals.opmode = MODE_QUEUE;
 			break;
 	}
-	instruction->f = funcs[func];
+	globals.current_instruction.f = funcs[func];
 }

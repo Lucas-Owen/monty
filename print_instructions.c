@@ -63,10 +63,10 @@ void i_pchar(stack_t **stack, unsigned int line_number)
 void i_pstr(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp = *stack;
-		
+
 	while (temp)
 	{
-		if (top(&temp) == 0)
+		if (s_top(temp) == 0)
 			break;
 		if (!isprint(s_top(*stack)))
 		{
@@ -74,7 +74,7 @@ void i_pstr(stack_t **stack, unsigned int line_number)
 				"L%d: can't pstr, value out of range\n", line_number);
 			exit(EXIT_FAILURE);
 		}
-		printf("%d", top(&temp));
+		printf("%c", s_top(temp));
 		temp = temp->next;
 	}
 	putchar('\n');

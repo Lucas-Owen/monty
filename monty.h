@@ -25,38 +25,41 @@ typedef struct instruction_s
  * struct global_vars_s - Structure to hold global variables
  * @fd: File pointer to the file being read
  * @operands: The main stack used to store variables
+ * @opmode: Whether as a queue or stack
+ * @current_instruction: Instruction under execution
  *
- * Description: To keep track of fd and operands
- * to be freed at exit
+ * Description: To keep track of fd, operands (stack), and
+ * instruction.opcode to be freed at exit
  */
 typedef struct global_vars_s
 {
 	int fd;
 	stack_t *operands;
-	int opmode;
+	char opmode;
+	instruction_t current_instruction;
 } global_vars_t;
 
-void eval_input(char *buffer, unsigned int, instruction_t *);
+void eval_input(char *buffer, unsigned int);
 
 #define MODE_STACK 0
 #define MODE_QUEUE 1
 
-#define I_PUSH 	0
-#define I_PALL 	1
-#define I_POP 	2
-#define I_PINT 	3
-#define I_SWAP 	4
-#define I_NOP 	5
-#define I_ADD 	6
-#define I_SUB 	7
-#define I_MUL 	8
-#define I_DIV 	9
-#define I_MOD 	10
+#define I_PUSH	0
+#define I_PALL	1
+#define I_POP	2
+#define I_PINT	3
+#define I_SWAP	4
+#define I_NOP	5
+#define I_ADD	6
+#define I_SUB	7
+#define I_MUL	8
+#define I_DIV	9
+#define I_MOD	10
 #define I_PCHAR 11
-#define I_PSTR 	12
-#define I_ROTL 	13
-#define I_ROTR 	14
-#define I_STACK 15
+#define I_PSTR	12
+#define I_ROTL	13
+#define I_ROTR	14
+#define I_STACK	15
 #define I_QUEUE	16
 
 void i_push(stack_t **stack, unsigned int line_number);
