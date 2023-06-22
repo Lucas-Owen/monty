@@ -5,10 +5,9 @@
  * @stack: The stack
  * @line_number: Line number of the function call
  */
-void i_pall(stack_t **stack, unsigned int line_number)
+void i_pall(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 {
 	stack_t *temp = *stack;
-	(void) line_number;
 
 	while (temp)
 	{
@@ -53,7 +52,7 @@ void i_pchar(stack_t **stack, unsigned int line_number)
 			"L%d: can't pchar, value out of range\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	printf("%c\n", s_top(*stack));
+	printf("%c\n", top);
 }
 
 /**
@@ -62,21 +61,17 @@ void i_pchar(stack_t **stack, unsigned int line_number)
  * @stack: The stack
  * @line_number: Line number of the function call
  */
-void i_pstr(stack_t **stack, unsigned int line_number)
+void i_pstr(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 {
 	stack_t *temp = *stack;
+	int top;
 
 	while (temp)
 	{
-		if (s_top(temp) == 0)
+		top = s_top(temp);
+		if (top <= 0 || top > 0x7F)
 			break;
-		if (!isprint(s_top(*stack)))
-		{
-			fprintf(stderr,
-				"L%d: can't pstr, value out of range\n", line_number);
-			exit(EXIT_FAILURE);
-		}
-		printf("%c", s_top(temp));
+		printf("%c", top);
 		temp = temp->next;
 	}
 	putchar('\n');

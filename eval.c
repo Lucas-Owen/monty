@@ -64,7 +64,7 @@ void eval_input(char *buffer, unsigned int line_number)
 				i_rotl, i_rotr,
 				i_nop, i_nop};
 	int func;
-	char *token = strtok(buffer, " \n");
+	char *token = strtok(buffer, " \t\n");
 
 	if (!token || token[0] == '#')
 		return;
@@ -73,7 +73,7 @@ void eval_input(char *buffer, unsigned int line_number)
 	switch (func)
 	{
 		case I_PUSH:
-			token = strtok(NULL, " \n");
+			token = strtok(NULL, " \t\n");
 			if (!token || !string_is_int(token))
 			{
 				fprintf(stderr, "L%d: usage: push integer\n", line_number);
