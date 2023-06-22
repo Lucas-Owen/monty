@@ -49,6 +49,8 @@ void eval_input(char *buffer, unsigned int, instruction_t *);
 #define I_MUL 	8
 #define I_DIV 	9
 #define I_MOD 	10
+#define I_PCHAR 11
+#define I_PSTR 	12
 
 void i_push(stack_t **stack, unsigned int line_number);
 void i_nop(stack_t **stack, unsigned int line_number);
@@ -62,6 +64,9 @@ void i_sub(stack_t **stack, unsigned int line_number);
 void i_mul(stack_t **stack, unsigned int line_number);
 void i_div(stack_t **stack, unsigned int line_number);
 void i_mod(stack_t **stack, unsigned int line_number);
+
+void i_pchar(stack_t **stack, unsigned int line_number);
+void i_pstr(stack_t **stack, unsigned int line_number);
 
 __attribute__((destructor)) void cleanup(void);
 

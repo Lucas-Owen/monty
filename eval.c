@@ -21,10 +21,22 @@ int validate_opcode(char *opcode, unsigned int line_number)
 		return (I_POP);
 	if (strcmp(opcode, "swap") == 0)
 		return (I_SWAP);
-	if (strcmp(opcode, "add") == 0)
-		return (I_ADD);
 	if (strcmp(opcode, "nop") == 0)
 		return (I_NOP);
+	if (strcmp(opcode, "add") == 0)
+		return (I_ADD);
+	if (strcmp(opcode, "sub") == 0)
+		return (I_SUB);
+	if (strcmp(opcode, "mul") == 0)
+		return (I_MUL);
+	if (strcmp(opcode, "div") == 0)
+		return (I_DIV);
+	if (strcmp(opcode, "mod") == 0)
+		return (I_MOD);
+	if (strcmp(opcode, "pchar") == 0)
+		return (I_PCHAR);
+	if (strcmp(opcode, "pstr") == 0)
+		return (I_PSTR);
 	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
 	exit(EXIT_FAILURE);
 }
@@ -40,11 +52,11 @@ void eval_input(char *buffer, unsigned int line_number,
 	instruction_t *instruction)
 {
 	const void (*funcs[])(stack_t **, unsigned int) = {i_push, i_pall, i_pop,
-	i_pint, i_swap, i_nop, i_add, i_sub, i_mul, i_div, i_mod};
+	i_pint, i_swap, i_nop, i_add, i_sub, i_mul, i_div, i_mod, i_pchar, i_pstr};
 	int func;
 	char *token = strtok(buffer, " \n");
 
-	if (!token || strcmp(token, "#") == 0)
+	if (!token || token[0] == '#')
 		return;
 	func = validate_opcode(token, line_number);
 	instruction->opcode = my_strdup(token);
