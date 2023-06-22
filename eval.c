@@ -39,6 +39,8 @@ int validate_opcode(char *opcode, unsigned int line_number)
 void eval_input(char *buffer, unsigned int line_number,
 	instruction_t *instruction)
 {
+	const void (*funcs[])(stack_t **, int) = {i_push, i_pall, i_pop, i_pint,
+											i_swap, i_add, i_nop};
 	int func;
 	char *token = strtok(buffer, " \n");
 
@@ -46,36 +48,16 @@ void eval_input(char *buffer, unsigned int line_number,
 		return;
 	func = validate_opcode(token, line_number);
 	instruction->opcode = my_strdup(token);
-	switch (func)
+	if (func == I_PUSH)
 	{
-		case I_PUSH:
-				token = strtok(NULL, " \n");
-				if (!token || !string_is_int(token))
-				{
-					free(instruction->opcode);
-					fprintf(stderr, "L%d: usage: push integer\n", line_number);
-					exit(EXIT_FAILURE);
-				}
-				s_push(&globals.operands, atoi(token));
-				instruction->f = i_push;
-				break;
-		case I_PALL:
-				instruction->f = i_pall;
-				break;
-		case I_PINT:
-				instruction->f = i_pint;
-				break;
-		case I_POP:
-				instruction->f = i_pop;
-				break;
-		case I_SWAP:
-				instruction->f = i_swap;
-				break;
-		case I_ADD:
-				instruction->f = i_add;
-				break;
-		case I_NOP:
-				instruction->f = i_nop;
-				break;
+		token = strtok(NULL, " \n");
+		if (!token || !string_is_int(token))
+		{
+			free(instruction->opcode);
+			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			exit(EXIT_FAILURE);
+		}
+		s_push(&globals.operands, atoi(token));
 	}
+	instruction->f = funcs[func];
 }
