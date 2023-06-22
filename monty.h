@@ -33,10 +33,13 @@ typedef struct global_vars_s
 {
 	int fd;
 	stack_t *operands;
+	int opmode;
 } global_vars_t;
 
 void eval_input(char *buffer, unsigned int, instruction_t *);
 
+#define MODE_STACK 0
+#define MODE_QUEUE 1
 
 #define I_PUSH 	0
 #define I_PALL 	1
@@ -53,6 +56,8 @@ void eval_input(char *buffer, unsigned int, instruction_t *);
 #define I_PSTR 	12
 #define I_ROTL 	13
 #define I_ROTR 	14
+#define I_STACK 15
+#define I_QUEUE	16
 
 void i_push(stack_t **stack, unsigned int line_number);
 void i_nop(stack_t **stack, unsigned int line_number);

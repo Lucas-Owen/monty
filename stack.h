@@ -34,5 +34,6 @@ bool s_isEmpty(stack_t *);
 bool s_swap(stack_t **);
 void s_rotl(stack_t **);
 void s_rotr(stack_t **);
+void s_reverse(stack_t **);
 
 #endif /* STACK_H */

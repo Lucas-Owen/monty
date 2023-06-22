@@ -1,6 +1,6 @@
 #include "monty.h"
 
-global_vars_t globals = {-1, NULL};
+global_vars_t globals = {-1, NULL, MODE_STACK};
 
 /**
  * validate_opcode - Checks if an opcode is valid, returns the type of function
@@ -41,6 +41,10 @@ int validate_opcode(char *opcode, unsigned int line_number)
 		return (I_ROTL);
 	if (strcmp(opcode, "rotr") == 0)
 		return (I_ROTR);
+	if (strcmp(opcode, "stack") == 0)
+		return (I_STACK);
+	if (strcmp(opcode, "queue") == 0)
+		return (I_QUEUE);
 	fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
 	exit(EXIT_FAILURE);
 }
@@ -67,16 +71,26 @@ void eval_input(char *buffer, unsigned int line_number,
 		return;
 	func = validate_opcode(token, line_number);
 	instruction->opcode = my_strdup(token);
-	if (func == I_PUSH)
+	switch (func)
 	{
-		token = strtok(NULL, " \n");
-		if (!token || !string_is_int(token))
-		{
-			free(instruction->opcode);
-			fprintf(stderr, "L%d: usage: push integer\n", line_number);
-			exit(EXIT_FAILURE);
-		}
-		s_push(&globals.operands, atoi(token));
+		case I_PUSH:
+			token = strtok(NULL, " \n");
+			if (!token || !string_is_int(token))
+			{
+				free(instruction->opcode);
+				fprintf(stderr, "L%d: usage: push integer\n", line_number);
+				exit(EXIT_FAILURE);
+			}
+			s_push(&globals.operands, atoi(token));
+			if (globas.opmode == MODE_QUEUE)
+				i_rotl(&globals.operands);
+			break;
+		case I_STACK:
+			globals.opmode = MODE_STACK;
+			break;
+		case I_QUEUE:
+			globals.opmode = MODE_QUEUE;
+			break;
 	}
 	instruction->f = funcs[func];
 }

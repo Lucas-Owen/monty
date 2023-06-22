@@ -56,3 +56,23 @@ void s_rotr(stack_t **stack)
     (*stack) = second_last->next;
     second_last->next = NULL;
 }
+
+/**
+ * s_reverse - Reverse the stack such that the top becomes the bottom
+ * @stack: Pointer to the head of the stack
+ * Return: void
+ */
+void s_reverse(stack_t **stack)
+{
+    if (*stack == NULL)
+        return;
+    temp = *stack;
+    while (temp)
+    {
+        *stack = temp;
+        next = temp->next;
+        temp->next = temp->prev;
+        temp->prev = next;
+        temp = next;
+    }
+}
