@@ -38,13 +38,17 @@ typedef struct global_vars_s
 void eval_input(char *buffer, unsigned int, instruction_t *);
 
 
-#define I_PUSH 0
-#define I_PALL 1
-#define I_POP 2
-#define I_PINT 3
-#define I_SWAP 4
-#define I_ADD 5
-#define I_NOP 6
+#define I_PUSH 	0
+#define I_PALL 	1
+#define I_POP 	2
+#define I_PINT 	3
+#define I_SWAP 	4
+#define I_NOP 	5
+#define I_ADD 	6
+#define I_SUB 	7
+#define I_MUL 	8
+#define I_DIV 	9
+#define I_MOD 	10
 
 void i_push(stack_t **stack, unsigned int line_number);
 void i_nop(stack_t **stack, unsigned int line_number);
@@ -52,7 +56,12 @@ void i_pall(stack_t **stack, unsigned int line_number);
 void i_pop(stack_t **stack, unsigned int line_number);
 void i_pint(stack_t **stack, unsigned int line_number);
 void i_swap(stack_t **stack, unsigned int line_number);
+
 void i_add(stack_t **stack, unsigned int line_number);
+void i_sub(stack_t **stack, unsigned int line_number);
+void i_mul(stack_t **stack, unsigned int line_number);
+void i_div(stack_t **stack, unsigned int line_number);
+void i_mod(stack_t **stack, unsigned int line_number);
 
 __attribute__((destructor)) void cleanup(void);
 

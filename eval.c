@@ -39,8 +39,8 @@ int validate_opcode(char *opcode, unsigned int line_number)
 void eval_input(char *buffer, unsigned int line_number,
 	instruction_t *instruction)
 {
-	const void (*funcs[])(stack_t **, int) = {i_push, i_pall, i_pop, i_pint,
-											i_swap, i_add, i_nop};
+	const void (*funcs[])(stack_t **, unsigned int) = {i_push, i_pall, i_pop,
+	i_pint, i_swap, i_nop, i_add, i_sub, i_mul, i_div, i_mod};
 	int func;
 	char *token = strtok(buffer, " \n");
 

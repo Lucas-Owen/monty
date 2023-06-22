@@ -62,23 +62,4 @@ void i_swap(stack_t **stack, unsigned int line_number)
 	}
 }
 
-/**
- * i_add - Add the top two elements of the stack, pop the first element,
- * and store the result in the top element
- * @stack: The stack
- * @line_number: Line number of the function call
- */
-void i_add(stack_t **stack, unsigned int line_number)
-{
-	int result;
-
-	if (s_isEmpty((*stack)) || s_isEmpty((*stack)->next))
-	{
-		fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-	result = s_top(*stack);
-	s_pop(stack);
-	(*stack)->n += result;
-}
 
