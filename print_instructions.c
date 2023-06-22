@@ -39,13 +39,15 @@ void i_pint(stack_t **stack, unsigned int line_number)
  */
 void i_pchar(stack_t **stack, unsigned int line_number)
 {
+	int top;
+
 	if (s_isEmpty(*stack))
 	{
 		fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-
-	if (!isprint(s_top(*stack)))
+	top = s_top(*stack);
+	if (top < 0 || top > 0x7F)
 	{
 		fprintf(stderr,
 			"L%d: can't pchar, value out of range\n", line_number);
