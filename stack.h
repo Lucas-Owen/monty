@@ -28,8 +28,11 @@ typedef struct stack_s
 void s_push(stack_t **, int);
 void s_pop(stack_t **);
 int s_top(stack_t *);
-bool s_swap(stack_t **);
 bool s_isEmpty(stack_t *);
 
+/* Advanced stack methods */
+bool s_swap(stack_t **);
+void s_rotl(stack_t **);
+void s_rotr(stack_t **);
 
 #endif /* STACK_H */
