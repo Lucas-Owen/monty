@@ -24,6 +24,10 @@ void *my_malloc(size_t size)
  */
 bool string_is_int(char *str)
 {
+	if (*str == '-')
+		str++;
+	if (!*str)
+		return (false);
 	while (*str)
 	{
 		if (!isdigit(*str))
